@@ -1,0 +1,5 @@
+{
+  "name": "pubmed",
+  "version": "1.0.0",
+  "description": "PubMed E-utilities API を使用した生物医学文献の検索・取得・分析スキル。3,600万件以上の医学文献データベースにアクセス可能。"
+}
