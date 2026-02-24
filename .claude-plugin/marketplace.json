@@ -1,5 +1,5 @@
 {
-  "name": "ubie-oss-plugins",
+  "name": "ubie-oss-claude-code-plugin",
   "owner": {
     "name": "ubie-oss"
   },
@@ -16,11 +16,10 @@
       "category": "learning"
     },
     {
-      "name": "pubmed",
-      "source": "./plugins/pubmed",
-      "description": "PubMed E-utilities API を使用した生物医学文献の検索・取得・分析スキル。3,600万件以上の医学文献データベースにアクセス可能。",
-      "version": "1.0.0",
-      "category": "life-sciences"
+      "name": "healthcare-skills",
+      "source": "./plugins/healthcare-skills",
+      "description": "医療従事者向けの Claude Code プラグイン。PubMed 文献検索など、医療業務に役立つスキル・ツールを収録。",
+      "version": "1.0.0"
     }
   ]
 }

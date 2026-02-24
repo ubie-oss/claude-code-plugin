@@ -1,0 +1,5 @@
+{
+  "name": "healthcare-skills",
+  "version": "1.0.0",
+  "description": "医療従事者向けの Claude Code プラグイン。PubMed 文献検索など、医療業務に役立つスキル・ツールを収録。"
+}
