@@ -1,0 +1,26 @@
+{
+  "name": "ubie-oss-plugins",
+  "owner": {
+    "name": "ubie-oss"
+  },
+  "metadata": {
+    "description": "Ubie OSS Claude Code plugins",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "hello-world",
+      "source": "./plugins/hello-world",
+      "description": "Comprehensive sample plugin demonstrating all Claude Code extension points.",
+      "version": "1.0.0",
+      "category": "learning"
+    },
+    {
+      "name": "pubmed",
+      "source": "./plugins/pubmed",
+      "description": "PubMed E-utilities API を使用した生物医学文献の検索・取得・分析スキル。3,600万件以上の医学文献データベースにアクセス可能。",
+      "version": "1.0.0",
+      "category": "life-sciences"
+    }
+  ]
+}
