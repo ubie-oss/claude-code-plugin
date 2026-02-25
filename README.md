@@ -1,72 +1,71 @@
-# Claude Plugin Monorepo Template
+# Ubie OSS Claude Code Plugins
 
-Template repository for bootstrapping high-quality Claude Code plugins with shared CI/CD and testing infrastructure.
+Ubie OSS が提供する Claude Code プラグイン集です。医療・ヘルスケア領域をはじめとする業務支援スキルをモノレポ構成で管理しています。
 
-## Key Features
+## Plugins
 
-- **Standard Plugin Layout**: Follows best practices for Skills, Agents, Hooks, MCP, and LSP.
-- **Monorepo Ready**: Designed to host multiple plugins under the `plugins/` directory.
-- **Comprehensive Examples**: The `hello-world` plugin demonstrates every available extension point.
-- **Shared CI/CD**: Unified quality checks via `trunk` and GitHub Actions.
-- **Integration Tests**: Automated smoke tests that validate manifest schemas and component discovery across all plugins.
+| Plugin                                            | Description                                                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [hello-world](./plugins/hello-world/)             | Claude Code の全拡張ポイント（Skills, Agents, Hooks, MCP, LSP）を網羅したサンプルプラグイン |
+| [healthcare-skills](./plugins/healthcare-skills/) | 医療従事者向けプラグイン。PubMed 文献検索など、医療業務に役立つスキル・ツールを収録         |
 
 ## Repository Layout
 
 ```text
 .
-├── plugins/                     # Container for all plugins
-│   └── hello-world/             # Comprehensive sample plugin
-│       ├── .claude-plugin/      # Plugin metadata (plugin.json)
-│       ├── agents/              # Custom agent definitions
-│       ├── skills/              # Model-invoked skills (SKILL.md)
-│       ├── hooks/               # Event hook configurations
-│       ├── .mcp.json            # MCP server configuration
-│       └── .lsp.json            # LSP server configuration
-├── integration_tests/           # Shared testing harness
-│   ├── run.sh                   # Test orchestrator (scans plugins/)
-│   ├── validate-manifest.sh     # Manifest JSON schema validator
-│   └── ...
+├── plugins/
+│   ├── hello-world/             # サンプルプラグイン
+│   │   ├── .claude-plugin/      # プラグインメタデータ (plugin.json)
+│   │   ├── agents/              # サブエージェント定義
+│   │   ├── skills/              # スキル定義 (SKILL.md)
+│   │   ├── hooks/               # フック設定
+│   │   ├── .mcp.json            # MCP サーバー設定
+│   │   └── .lsp.json            # LSP サーバー設定
+│   └── healthcare-skills/       # 医療向けプラグイン
+│       ├── .claude-plugin/      # プラグインメタデータ (plugin.json)
+│       └── skills/              # スキル定義 (pubmed 検索など)
+├── integration_tests/           # 統合テスト
 ├── .github/workflows/           # GitHub Actions (Lint, Integration Tests)
-├── Makefile                     # Task runner
+├── Makefile                     # タスクランナー
 └── README.md
 ```
-
-## Quickstart
-
-1.  **Create a new repository** from this template.
-2.  **Explore the sample plugin** in `plugins/hello-world/` to see how components are defined.
-3.  **Run local checks**:
-    ```bash
-    make lint
-    make test-integration-docker
-    ```
 
 ## Development
 
 ### Adding a New Plugin
 
-Create a new directory in `plugins/` following the [Standard Plugin Layout](https://code.claude.com/docs/en/plugins-reference#standard-plugin-layout):
+`plugins/` 配下に新しいディレクトリを作成し、[Standard Plugin Layout](https://code.claude.com/docs/en/plugins-reference#standard-plugin-layout) に従って構成します。
 
-- `plugins/<name>/.claude-plugin/plugin.json`: Required manifest.
-- `plugins/<name>/skills/`: Agent Skills folder.
-- `plugins/<name>/agents/`: Subagent markdown files.
-- `plugins/<name>/hooks/`: Event hook configurations.
-- `plugins/<name>/.mcp.json`: MCP configurations.
-- `plugins/<name>/.lsp.json`: LSP configurations.
+- `plugins/<name>/.claude-plugin/plugin.json`: マニフェスト（必須）
+- `plugins/<name>/skills/`: スキル定義
+- `plugins/<name>/agents/`: サブエージェント定義
+- `plugins/<name>/hooks/`: フック設定
+- `plugins/<name>/.mcp.json`: MCP サーバー設定
+- `plugins/<name>/.lsp.json`: LSP サーバー設定
+
+### Local Checks
+
+```bash
+make lint                    # Lint (trunk check)
+make format                  # Format (trunk fmt)
+make test-integration-docker # 統合テスト (Docker)
+```
 
 ### Testing
 
-The integration test runner (`./integration_tests/run.sh`) automatically discovers all directories in `plugins/` that contain a `.claude-plugin/plugin.json` file.
+統合テストランナー (`./integration_tests/run.sh`) は `plugins/` 配下の `.claude-plugin/plugin.json` を持つディレクトリを自動検出します。
 
-- Run all tests: `./integration_tests/run.sh`
-- Verbose output: `./integration_tests/run.sh --verbose`
-- Skip loading tests (if Claude CLI is not installed): `./integration_tests/run.sh --skip-loading`
+```bash
+./integration_tests/run.sh              # 全テスト実行
+./integration_tests/run.sh --verbose    # 詳細出力
+./integration_tests/run.sh --skip-loading  # ロードテストをスキップ
+```
 
 ## CI/CD
 
-- **Trunk Check**: Runs linters and static analysis on every PR.
-- **Integration Tests**: Automatically validates every plugin in the `plugins/` directory.
+- **Trunk Check**: PR ごとに Lint・静的解析を実行
+- **Integration Tests**: `plugins/` 配下の全プラグインを自動検証
 
 ## License
 
-Apache License 2.0. See `LICENSE`.
+Apache License 2.0. See [LICENSE](./LICENSE).
